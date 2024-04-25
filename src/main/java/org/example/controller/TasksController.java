@@ -7,6 +7,7 @@ import org.example.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -69,7 +71,11 @@ public class TasksController {
      * Adds a task.
      */
     @PostMapping
-    public String add(@ModelAttribute("task") Task task) {
+    public String add(@ModelAttribute("task") @Valid Task task, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new";
+        }
+
         taskDAO.add(task);
         return "redirect:/tasks";
     }
@@ -86,7 +92,11 @@ public class TasksController {
      * Updates a task based on its ID.
      */
     @PatchMapping("/{id}")
-    public String update(@PathVariable("id") int id, @ModelAttribute("Task") Task task) {
+    public String update(@PathVariable("id") int id, @ModelAttribute("task") @Valid Task task, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
+
         taskDAO.update(id, task);
         return "redirect:/tasks";
     }

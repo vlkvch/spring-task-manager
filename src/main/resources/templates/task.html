@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task View</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+    <h1 th:text="${task.getTitle()}">Task's title</h1>
+
+    <b>Description</b>
+    <p th:text="${task.getDescription()}">Tasks's description</p>
+
+    <b>Due date</b>
+    <p th:text="${task.getDueDate()}">Task's due date</p>
+
+    <a th:href="@{/tasks/{id}/edit(id=${task.getId()})}"><button>Edit</button></a>
+
+    <form th:method="delete" th:action="@{/tasks/{id}(id=${task.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/tasks/{date}(date=${task.getDueDate()})}" th:text="|More tasks for ${task.getDueDate()}|">More tasks for this date</a>
+</body>
+</html>

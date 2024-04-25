@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tasks</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+    <h1>Tasks</h1>
+    <ul>
+        <li th:each="task : ${tasks}">
+            <a th:href="@{/tasks/{id}(id=${task.getId()})}" th:text="${task.getTitle()}"></a>
+        </li>
+    </ul>
+    <a href="/tasks/new"><button>Add a new task</button></a>
+</body>
+</html>

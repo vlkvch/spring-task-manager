@@ -1,0 +1,21 @@
+services:
+  app:
+    image: app
+    build:
+      dockerfile: Dockerfile
+    networks:
+      - net
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  db:
+    image: postgres:16.2-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - net
+    ports:
+      - 5432:5432
+networks:
+  net:

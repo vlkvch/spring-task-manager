@@ -3,15 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tasks for today</title>
+    <title>Eror</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-    <h1>Today's tasks:</h1>
-    <ul>
-        <li th:each="task : ${todaysTasks}">
-            <a th:href="@{/tasks/{id}(id=${task.getId()})}" th:text="${task.getTitle()}"></a>
-        </li>
-    </ul>
+    <h1>Some error has occured!</h1>
+    <a href="/"><button>Go to the Home page</button></a>
 </body>
 </html>

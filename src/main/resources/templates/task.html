@@ -21,8 +21,9 @@
         <input type="submit" value="Delete"/>
     </form>
 
-    <hr>
-
-    <a th:href="@{/tasks/{date}(date=${task.getDueDate()})}" th:text="|More tasks for ${task.getDueDate()}|">More tasks for this date</a>
+    <span th:if="${task.getDueDate() != null}">
+        <hr>
+        <a th:href="@{/tasks/{date}(date=${task.getDueDate()})}" th:text="|More tasks for ${task.getDueDate()}|">More tasks for this date</a>
+    </span>
 </body>
 </html>

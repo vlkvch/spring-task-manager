@@ -1,6 +1,6 @@
-CREATE TABLE Tasks(
-	id serial primary key,
-	title varchar,
-	duedate date,
-	description varchar
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR,
+    description VARCHAR,
+    duedate DATE
 );

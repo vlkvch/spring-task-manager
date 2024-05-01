@@ -1,12 +1,12 @@
 services:
   app:
     image: app
+    build:
+      dockerfile: Dockerfile
     environment:
       - DATABASE_URL=jdbc:postgresql://db:5432/postgres
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=postgres
-    build:
-      dockerfile: Dockerfile
     networks:
       - net
     ports:

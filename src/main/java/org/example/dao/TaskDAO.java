@@ -19,42 +19,42 @@ public class TaskDAO {
     private final JdbcTemplate jdbcTemplate;
 
     public List<Task> getAll() {
-        return jdbcTemplate.query("SELECT * FROM Tasks", new BeanPropertyRowMapper<>(Task.class));
+        return jdbcTemplate.query("SELECT * FROM tasks", new BeanPropertyRowMapper<>(Task.class));
     }
 
     public Task getById(int id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM Tasks WHERE id=?", new BeanPropertyRowMapper<>(Task.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM tasks WHERE id = ?", new BeanPropertyRowMapper<>(Task.class), id);
     }
 
     public List<Task> getByDueDate(LocalDate date) {
-        return jdbcTemplate.query("SELECT * FROM Tasks WHERE duedate=?", new BeanPropertyRowMapper<>(Task.class), date);
+        return jdbcTemplate.query("SELECT * FROM tasks WHERE duedate = ?", new BeanPropertyRowMapper<>(Task.class), date);
     }
 
     public void add(Task task) {
         jdbcTemplate.update(
-            "INSERT INTO Tasks(title, duedate, description) VALUES(?, ?, ?)",
+            "INSERT INTO tasks(title, description, duedate) VALUES(?, ?, ?)",
             task.getTitle(),
-            task.getDueDate(),
-            task.getDescription()
+            task.getDescription(),
+            task.getDueDate()
         );
     }
 
     public void update(int id, Task updatedTask) {
         jdbcTemplate.update(
-            "UPDATE Tasks SET title=?, dueDate=?, description=? WHERE id=?",
+            "UPDATE tasks SET title = ?, description = ?, dueDate = ? WHERE id = ?",
             updatedTask.getTitle(),
-            updatedTask.getDueDate(),
             updatedTask.getDescription(),
+            updatedTask.getDueDate(),
             id
         );
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM Tasks WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM tasks WHERE id = ?", id);
     }
 
     public List<Task> getTodaysTasks() {
-        return jdbcTemplate.query("SELECT * FROM Tasks WHERE duedate=?", new BeanPropertyRowMapper<>(Task.class), LocalDate.now());
+        return jdbcTemplate.query("SELECT * FROM tasks WHERE duedate = ?", new BeanPropertyRowMapper<>(Task.class), LocalDate.now());
     }
 
 }

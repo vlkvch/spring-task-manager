@@ -18,7 +18,7 @@ public class Task {
     private int id;
 
     @NotEmpty(message = "The title must not be empty")
-    @Size(min = 3, message = "The title must be at least 3 characters long")
+    @Size(min = 3, max = 128, message = "The title must be at least 3 characters long")
     private String title;
 
     @Size(max = 256, message = "The description must be less than 256 characters")

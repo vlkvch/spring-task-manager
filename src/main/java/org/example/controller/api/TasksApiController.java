@@ -8,6 +8,7 @@ import org.example.dao.TaskDAO;
 import org.example.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -40,7 +41,7 @@ public class TasksApiController {
                     bindingResult
                         .getAllErrors()
                         .stream()
-                        .map(e -> e.getDefaultMessage())
+                        .map(ObjectError::getDefaultMessage)
                         .toList(),
                     JsonNode.class
                 )
@@ -105,7 +106,7 @@ public class TasksApiController {
                     objectMapper.convertValue(
                         violations
                             .stream()
-                            .map(v -> v.getMessage())
+                            .map(ConstraintViolation<Task>::getMessage)
                             .toList(),
                         JsonNode.class
                     )

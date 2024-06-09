@@ -54,7 +54,7 @@ public class TaskDAO {
     }
 
     public List<Task> getTodaysTasks() {
-        return jdbcTemplate.query("SELECT * FROM tasks WHERE duedate = ?", new BeanPropertyRowMapper<>(Task.class), LocalDate.now());
+        return getByDueDate(LocalDate.now());
     }
 
 }
